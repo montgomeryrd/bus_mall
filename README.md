@@ -6,6 +6,6 @@ The user selects an image and then a new set of images will be displayed for the
 
 Images are non-recurring.
 
-The app will record the number of times an image is shown as well as the number of times an image has been selected by the user.
+The app will record the number of times an image is shown as well as the number of times an image has been selected.
 
 After a number of selections, the user will be shown the recorded information.
