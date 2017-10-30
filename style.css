@@ -1,0 +1,31 @@
+/* App Styles */
+
+html {
+  width: 100%;
+}
+
+body {
+  width: 960px;
+  margin: 30px auto;
+}
+
+header {
+  height: 250px;
+}
+
+h1 {
+  text-align: center;
+  font-family: Homemade Apple;
+  font-weight: bold;
+  font-size: 80px;
+}
+
+h2 {
+  text-align: center;
+  font-family: Amatic SC;
+  font-size: 60px;
+}
+.select_image {
+  display:inline-block;
+  float: left;
+}
