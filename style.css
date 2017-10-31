@@ -32,3 +32,7 @@ body h2 {
   padding: 20px;
   height: 200px;
 }
+
+p {
+  text-align: center;
+}

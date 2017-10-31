@@ -1,16 +1,23 @@
 'use strict';
 
-//Array of images
+//Variables
 var images = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
 
+//Even Listener
 var one = document.getElementById('one');
 var two = document.getElementById('two');
 var three = document.getElementById('three');
 
+one.addEventListener('click', listen());
+two.addEventListener('click', listen());
+three.addEventListener('click', listen());
+
 //Constructor Function
-function Product(name, filepath) {
+function Product(name, filepath, totalClicks, numberOfTimesShown) {
   this.name = name;
   this.filepath = filepath;
+  this.totalClicks = 0;
+  this.numberOfTimesShown = 0;
 }
 
 //Instantiated Objects
@@ -35,7 +42,8 @@ var usb = new Product('usb', './Images/usb.gif');
 var waterCan = new Product('water-can', './Images/water-can.jpg');
 var wineGlass = new Product('wine-glass', './Images/wine-glass');
 
-//My Ridiculous Random Number Generator
+//My Random Number Generator
+//It generates a set of numbers that are all different between 0 and 19
 var myNumbers = [];
 
 function randomNums (){
@@ -53,17 +61,13 @@ function randomNums (){
   myNumbers.push(randomNumber);
 }
 
-randomNums();
-console.log('Initial Three Numbers:', myNumbers);
-
-//These are the values that were shown last
+//checkNums checks my nums.
+//It generates a new set of numbers that aren't repeated from the previous set of numbers.
 var lastSet = [];
 
 function checkNums(){
-  lastSet.push(myNumbers);
-  console.log('These numbers were in the last set:', lastSet);
+  lastSet.push(myNumbers[0], myNumbers[1], myNumbers[2]);
   myNumbers = [];
-  console.log('myNumbers array should be empty ready for a new set of numbers:', myNumbers);
   var i = 0;
 
   while( i < 3 ) {
@@ -72,50 +76,32 @@ function checkNums(){
       randomNumber = Math.floor(Math.random() * images.length);
     }
     myNumbers.push(randomNumber);
-    console.log('This number should be new and added to myNumbers and be different from what was in the last set:', myNumbers);
     i++;
   }
   lastSet = [];
-  console.log('Shown Last should be empty here:', lastSet);
-  console.log('My Newest Set of Numbers:', myNumbers);
 }
 
-checkNums();
-
-
-/*
-Product.prototype.clicks = function () {}
+randomNums();
+console.log('Initial Three Numbers:', myNumbers);
 
 one.setAttribute('src', images[myNumbers[0]].filepath);
 console.log(one);
 two.setAttribute('src', images[myNumbers[1]].filepath);
-console.log(one);
+console.log(two);
 three.setAttribute('src', images[myNumbers[2]].filepath);
-console.log(one);
-*/
+console.log(three);
 
-/*one.addEventListener('click', function() {
-  counter++;
-  var src = this.getAttribute('src');
-  console.log('image src:', src);
-  console.log('total cat clicks:', counter);
-});
 
-var images = [];
-
-two.addEventListener('click', function() {
-  var src = this.getAttribute('src');
-  var name = this.getAttribute('id');
-
-  images.push(new Tracker(name, src));
-  console.log(images);
-});
-
-three.addEventListener('click', function() {
-  var src = this.getAttribute('src');
-  var name = this.getAttribute('id');
-
-  images.push(new Tracker(name, src));
-  console.log(images);
-});
-*/
+//Event Listener Function
+function listen() {
+  this.totalClicks++;
+  this.numberOfTimesShown++;
+  checkNums();
+  console.log('My Newest Set of Numbers:', myNumbers);
+  one.setAttribute('src', images[myNumbers[0]].filepath);
+  console.log(one);
+  two.setAttribute('src', images[myNumbers[1]].filepath);
+  console.log(two);
+  three.setAttribute('src', images[myNumbers[2]].filepath);
+  console.log(three);
+}
