@@ -57,33 +57,35 @@ randomNums();
 console.log('Initial Three Numbers:', myNumbers);
 
 //These are the values that were shown last
-var shownLast = [];
+var lastSet = [];
 
 function checkNums(){
-  shownLast.push(myNumbers);
-  console.log('These numbers were in the last set:', shownLast);
+  lastSet.push(myNumbers);
+  console.log('These numbers were in the last set:', lastSet);
   myNumbers = [];
-  console.log('myNumbers array should be empty:', myNumbers);
+  console.log('myNumbers array should be empty ready for a new set of numbers:', myNumbers);
   var i = 0;
 
   while( i < 3 ) {
     randomNumber = Math.floor(Math.random() * images.length);
-    while (randomNumber === shownLast[0] || randomNumber === shownLast[1] || randomNumber === shownLast[2] || randomNumber === myNumbers[0] || randomNumber === myNumbers[1]) {
+    while (randomNumber === lastSet[0] || randomNumber === lastSet[1] || randomNumber === lastSet[2] || randomNumber === myNumbers[0] || randomNumber === myNumbers[1]) {
       randomNumber = Math.floor(Math.random() * images.length);
     }
     myNumbers.push(randomNumber);
-    console.log('This number should be new and added to myNumbers:', myNumbers);
+    console.log('This number should be new and added to myNumbers and be different from what was in the last set:', myNumbers);
     i++;
   }
-  shownLast = [];
-  console.log('Shown Last should be empty here:', shownLast);
+  lastSet = [];
+  console.log('Shown Last should be empty here:', lastSet);
   console.log('My Newest Set of Numbers:', myNumbers);
 }
 
 checkNums();
-console.log('New set of Numbers', myNumbers);
+
 
 /*
+Product.prototype.clicks = function () {}
+
 one.setAttribute('src', images[myNumbers[0]].filepath);
 console.log(one);
 two.setAttribute('src', images[myNumbers[1]].filepath);
@@ -101,7 +103,15 @@ console.log(one);
 
 var images = [];
 
-dog.addEventListener('click', function() {
+two.addEventListener('click', function() {
+  var src = this.getAttribute('src');
+  var name = this.getAttribute('id');
+
+  images.push(new Tracker(name, src));
+  console.log(images);
+});
+
+three.addEventListener('click', function() {
   var src = this.getAttribute('src');
   var name = this.getAttribute('id');
 
