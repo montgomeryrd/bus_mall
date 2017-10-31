@@ -54,6 +54,9 @@ function randomNums (){
   previousNumbers.push(randomNumber);
 }
 
+randomNums();
+console.log('Initial Three Numbers:', previousNumbers);
+
 //These are the values that were shown last
 function checkNums(){
   shownLast.push(previousNumbers);
@@ -62,17 +65,15 @@ function checkNums(){
 
   while( i < 3 ) {
     randomNumber = Math.floor(Math.random() * images.length);
-    while (randomNumber === shownLast[0] || randomNumber === shownLast[1] || randomNumber === shownLast[2] || randomNumber === previousNumbers[0] || randomNumber === previousNumbers[1]) {
+    if (randomNumber === shownLast[0] || randomNumber === shownLast[1] || randomNumber === shownLast[2] || randomNumber === previousNumbers[0] || randomNumber === previousNumbers[1]) {
       randomNumber = Math.floor(Math.random() * images.length);
+    } else {
+      previousNumbers.push(randomNumber);
+      i++;
     }
-    previousNumbers.push(randomNumber);
-    i++;
+    shownLast = [];
   }
-  shownLast = [];
 }
-
-randomNums();
-console.log('Initial Three Numbers:', previousNumbers);
 
 checkNums();
 console.log('New set of Numbers', previousNumbers);
