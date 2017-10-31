@@ -72,10 +72,10 @@ function checkNums(){
 }
 
 randomNums();
-previousNumbers
+console.log('Initial Three Numbers:', previousNumbers);
 
 checkNums();
-previousNumbers
+console.log('New set of Numbers', previousNumbers);
 
 /*
 one.setAttribute('src', images[previousNumbers[0]].filepath);
