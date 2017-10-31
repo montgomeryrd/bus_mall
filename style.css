@@ -5,8 +5,8 @@ html {
 }
 
 body {
-  width: 960px;
-  margin: 30px auto;
+  width: 1000px;
+  margin: 20px auto;
 }
 
 header {
@@ -26,11 +26,19 @@ body h2 {
   font-size: 60px;
 }
 
+ul {
+  margin-bottom: 100px;
+}
+
 .spot {
-  display:inline-block;
-  float: left;
+  float:left;
   padding: 20px;
   height: 200px;
+}
+
+footer {
+  clear: both;
+  padding: 100px;
 }
 
 p {
