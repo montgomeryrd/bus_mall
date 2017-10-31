@@ -17,6 +17,12 @@ function Product(name, filepath, totalClicks, numberOfTimesShown) {
   this.numberOfTimesShown = 0;
 }
 
+//Object Literal
+var thumbsUp = {
+  name: 'thumbs',
+  filepath: './Images/thumbs.png'
+};
+
 //Instantiate Objects
 var bag = new Product('bag', './Images/bag.jpg');
 var banana = new Product('banana', './Images/banana.jpg');
@@ -96,8 +102,11 @@ console.log(three);
 //Event Listener Function
 function listen(e) {
   if (counter === 25) {
-    alert('Product Analysis Complete!');
-    counter = 0;
+    one.setAttribute('src', thumbsUp.filepath);
+    two.setAttribute('src', thumbsUp.filepath);
+    three.setAttribute('src', thumbsUp.filepath);
+    alert('Product Analysis Complete\n\n Thank you');
+    return;
   }
   counter++;
   console.log('Counter:', counter);
@@ -112,14 +121,14 @@ function listen(e) {
   three.setAttribute('src', images[myNumbers[2]].filepath);
   console.log(three);
 
+  //This accrues the number of times a specific image was shown
   images[myNumbers[0]].numberOfTimesShown++;
   images[myNumbers[1]].numberOfTimesShown++;
   images[myNumbers[2]].numberOfTimesShown++;
 
-  var source;
   //This function will track of how many times the user clicked a specific image
   for (var i = 0 ; i < images.length ; i++) {
-    source = e.target.getAttribute('src');
+    var source = e.target.getAttribute('src');
     if (source === images[i].filepath) {
       images[i].totalClicks++;
       console.log('Total Clicks:', images[i].totalClicks);
