@@ -4,7 +4,7 @@
 var one = document.getElementById('one');
 var two = document.getElementById('two');
 var three = document.getElementById('three');
-
+var counter = 0;
 one.addEventListener('click', listen);
 two.addEventListener('click', listen);
 three.addEventListener('click', listen);
@@ -94,9 +94,14 @@ console.log(three);
 
 
 //Event Listener Function
-function listen() {
-  this.totalClicks++;
-  this.numberOfTimesShown++;
+function listen(e) {
+  if (counter === 25) {
+    alert('Product Analysis Complete!');
+    counter = 0;
+  }
+  counter++;
+  console.log('Counter:', counter);
+
   checkNums();
   console.log('My Newest Set of Numbers:', myNumbers);
 
@@ -106,4 +111,18 @@ function listen() {
   console.log(two);
   three.setAttribute('src', images[myNumbers[2]].filepath);
   console.log(three);
+
+  images[myNumbers[0]].numberOfTimesShown++;
+  images[myNumbers[1]].numberOfTimesShown++;
+  images[myNumbers[2]].numberOfTimesShown++;
+
+  var source;
+  //This function will track of how many times the user clicked a specific image
+  for (var i = 0 ; i < images.length ; i++) {
+    source = e.target.getAttribute('src');
+    if (source === images[i].filepath) {
+      images[i].totalClicks++;
+      console.log('Total Clicks:', images[i].totalClicks);
+    }
+  }
 }

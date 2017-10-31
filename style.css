@@ -27,13 +27,17 @@ body h2 {
 }
 
 ul {
-  margin-bottom: 100px;
+  margin-bottom: 50px;
+}
+ul li {
+  display: inline-block;
+  width: 330px;
+  text-align:center;
 }
 
 .spot {
-  float:left;
   padding: 20px;
-  height: 200px;
+  height: 150px;
 }
 
 footer {
