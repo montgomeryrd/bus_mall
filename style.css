@@ -10,22 +10,25 @@ body {
 }
 
 header {
-  height: 250px;
+  height: 200px;
 }
 
-h1 {
+body h1 {
   text-align: center;
   font-family: Homemade Apple;
   font-weight: bold;
   font-size: 80px;
 }
 
-h2 {
+body h2 {
   text-align: center;
   font-family: Amatic SC;
   font-size: 60px;
 }
-.select_image {
+
+.spot {
   display:inline-block;
   float: left;
+  padding: 20px;
+  height: 200px;
 }

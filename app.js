@@ -7,19 +7,14 @@ var one = document.getElementById('one');
 var two = document.getElementById('two');
 var three = document.getElementById('three');
 
-
-one.setAttribute('src','Images/bag.jpg');
-console.log(one);
-
-
 //Constructor Function
 function Filepath(name, filepath) {
   this.name = name;
   this.filepath = filepath;
 }
 
-//Objects
-var bag = new Filepath('bag', 'Image/bag.jpg');
+//Instantiated Objects
+var bag = new Filepath('bag', './Image/bag.jpg');
 var banana = new Filepath('banana', 'Image/banana.jpg');
 var bathroom = new Filepath('bathroom', 'Images/bathoom.jpg');
 var boots = new Filepath('boots', 'Images/boots.jpg');
@@ -48,28 +43,63 @@ function randomNums (){
   var randomNumber = Math.floor(Math.random() * images.length);
   previousNumbers.push(randomNumber);
   randomNumber = Math.floor(Math.random() * images.length);
-  while (randomNumber === previousNumbers[0] || randomNumber === previousNumbers[1] || randomNumber === previousNumbers[2]) {
+  while (randomNumber === previousNumbers[0]) {
     randomNumber = Math.floor(Math.random() * images.length);
   }
   previousNumbers.push(randomNumber);
   randomNumber = Math.floor(Math.random() * images.length);
-  while (randomNumber === previousNumbers[0] || randomNumber === previousNumbers[1] || randomNumber === previousNumbers[2]) {
+  while (randomNumber === previousNumbers[0] || randomNumber === previousNumbers[1]) {
     randomNumber = Math.floor(Math.random() * images.length);
   }
   previousNumbers.push(randomNumber);
 }
-
-randomNums();
 
 //These are the values that were shown last
 function checkNums(){
   shownLast.push(previousNumbers);
   previousNumbers = [];
+  var i = 0;
 
-  for(var i = 0 ; i < 3 ; i++) {
+  while( i < 3 ) {
     randomNumber = Math.floor(Math.random() * images.length);
-    if (randomNumber !== shownLast[0] || randomNumber !== shownLast[1] || randomNumber !== shownLast[2]) {
-      previousNumbers.push(randomNumber);
+    while (randomNumber === shownLast[0] || randomNumber === shownLast[1] || randomNumber === shownLast[2] || randomNumber === previousNumbers[0] || randomNumber === previousNumbers[1]) {
+      randomNumber = Math.floor(Math.random() * images.length);
     }
+    previousNumbers.push(randomNumber);
+    i++;
   }
+  shownLast = [];
 }
+
+randomNums();
+previousNumbers
+
+checkNums();
+previousNumbers
+
+/*
+one.setAttribute('src', images[previousNumbers[0]].filepath);
+console.log(one);
+two.setAttribute('src', images[previousNumbers[1]].filepath);
+console.log(one);
+three.setAttribute('src', images[previousNumbers[2]].filepath);
+console.log(one);
+*/
+
+/*one.addEventListener('click', function() {
+  counter++;
+  var src = this.getAttribute('src');
+  console.log('image src:', src);
+  console.log('total cat clicks:', counter);
+});
+
+var images = [];
+
+dog.addEventListener('click', function() {
+  var src = this.getAttribute('src');
+  var name = this.getAttribute('id');
+
+  images.push(new Tracker(name, src));
+  console.log(images);
+});
+*/
