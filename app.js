@@ -8,82 +8,87 @@ var two = document.getElementById('two');
 var three = document.getElementById('three');
 
 //Constructor Function
-function Filepath(name, filepath) {
+function Product(name, filepath) {
   this.name = name;
   this.filepath = filepath;
 }
 
 //Instantiated Objects
-var bag = new Filepath('bag', './Image/bag.jpg');
-var banana = new Filepath('banana', 'Image/banana.jpg');
-var bathroom = new Filepath('bathroom', 'Images/bathoom.jpg');
-var boots = new Filepath('boots', 'Images/boots.jpg');
-var breakfast = new Filepath('breakfast', 'Images/breakfast.jpg');
-var bubblegum = new Filepath('bubblegum', 'Images/bubblegum.jpg');
-var chair = new Filepath('chair', 'Images/chair.jpg');
-var cthulu = new Filepath('cthulu', 'Images/cthulu.jpg');
-var dogDuck = new Filepath('dog-duck', 'Images/dog-duck.jpg');
-var dragon = new Filepath('dragon', 'Images/dragon.jpg');
-var pen = new Filepath('pen', 'Images/pen.jpg');
-var petSweep = new Filepath('pet-sweep', 'Images/pet-sweep.jpg');
-var scissors = new Filepath('scissors', 'Images/scissors.jpg');
-var shark = new Filepath('shark', 'Images/shark.jpg');
-var sweep = new Filepath('sweep', 'Images/sweep.png');
-var tauntaun = new Filepath('tauntaun', 'Images/tauntaun.jpg');
-var unicorn = new Filepath('unicorn', 'Images/unicorn.jpg');
-var usb = new Filepath('usb', 'Images/usb.gif');
-var waterCan = new Filepath('water-can', 'Images/water-can.jpg');
-var wineGlass = new Filepath('wine-glass', 'Images/wine-glass');
+var bag = new Product('bag', './Image/bag.jpg');
+var banana = new Product('banana', './Image/banana.jpg');
+var bathroom = new Product('bathroom', './Images/bathoom.jpg');
+var boots = new Product('boots', './Images/boots.jpg');
+var breakfast = new Product('breakfast', './Images/breakfast.jpg');
+var bubblegum = new Product('bubblegum', './Images/bubblegum.jpg');
+var chair = new Product('chair', './Images/chair.jpg');
+var cthulu = new Product('cthulu', './Images/cthulu.jpg');
+var dogDuck = new Product('dog-duck', './Images/dog-duck.jpg');
+var dragon = new Product('dragon', './Images/dragon.jpg');
+var pen = new Product('pen', './Images/pen.jpg');
+var petSweep = new Product('pet-sweep', './Images/pet-sweep.jpg');
+var scissors = new Product('scissors', './Images/scissors.jpg');
+var shark = new Product('shark', './Images/shark.jpg');
+var sweep = new Product('sweep', './Images/sweep.png');
+var tauntaun = new Product('tauntaun', './Images/tauntaun.jpg');
+var unicorn = new Product('unicorn', './Images/unicorn.jpg');
+var usb = new Product('usb', './Images/usb.gif');
+var waterCan = new Product('water-can', './Images/water-can.jpg');
+var wineGlass = new Product('wine-glass', './Images/wine-glass');
 
 //My Ridiculous Random Number Generator
-var previousNumbers = [];
-var shownLast = [];
+var myNumbers = [];
 
 function randomNums (){
   var randomNumber = Math.floor(Math.random() * images.length);
-  previousNumbers.push(randomNumber);
+  myNumbers.push(randomNumber);
   randomNumber = Math.floor(Math.random() * images.length);
-  while (randomNumber === previousNumbers[0]) {
+  while (randomNumber === myNumbers[0]) {
     randomNumber = Math.floor(Math.random() * images.length);
   }
-  previousNumbers.push(randomNumber);
+  myNumbers.push(randomNumber);
   randomNumber = Math.floor(Math.random() * images.length);
-  while (randomNumber === previousNumbers[0] || randomNumber === previousNumbers[1]) {
+  while (randomNumber === myNumbers[0] || randomNumber === myNumbers[1]) {
     randomNumber = Math.floor(Math.random() * images.length);
   }
-  previousNumbers.push(randomNumber);
+  myNumbers.push(randomNumber);
 }
 
 randomNums();
-console.log('Initial Three Numbers:', previousNumbers);
+console.log('Initial Three Numbers:', myNumbers);
 
 //These are the values that were shown last
+var shownLast = [];
+
 function checkNums(){
-  shownLast.push(previousNumbers);
-  previousNumbers = [];
+  shownLast.push(myNumbers);
+  console.log('These numbers were in the last set:', shownLast);
+  myNumbers = [];
+  console.log('myNumbers array should be empty:', myNumbers);
   var i = 0;
 
   while( i < 3 ) {
     randomNumber = Math.floor(Math.random() * images.length);
-    if (randomNumber === shownLast[0] || randomNumber === shownLast[1] || randomNumber === shownLast[2] || randomNumber === previousNumbers[0] || randomNumber === previousNumbers[1]) {
+    while (randomNumber === shownLast[0] || randomNumber === shownLast[1] || randomNumber === shownLast[2] || randomNumber === myNumbers[0] || randomNumber === myNumbers[1]) {
       randomNumber = Math.floor(Math.random() * images.length);
-    } else {
-      previousNumbers.push(randomNumber);
-      i++;
     }
-    shownLast = [];
+    myNumbers.push(randomNumber);
+    console.log('This number should be new and added to myNumbers:', myNumbers);
+    i++;
   }
+  shownLast = [];
+  console.log('Shown Last should be empty here:', shownLast);
+  console.log('My Newest Set of Numbers:', myNumbers);
 }
 
 checkNums();
-console.log('New set of Numbers', previousNumbers);
+console.log('New set of Numbers', myNumbers);
 
 /*
-one.setAttribute('src', images[previousNumbers[0]].filepath);
+one.setAttribute('src', images[myNumbers[0]].filepath);
 console.log(one);
-two.setAttribute('src', images[previousNumbers[1]].filepath);
+two.setAttribute('src', images[myNumbers[1]].filepath);
 console.log(one);
-three.setAttribute('src', images[previousNumbers[2]].filepath);
+three.setAttribute('src', images[myNumbers[2]].filepath);
 console.log(one);
 */
 
