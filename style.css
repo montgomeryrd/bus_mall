@@ -14,20 +14,17 @@ header {
   width: 1000px;
 }
 
-#my_chart {
-
-}
-
 /* Chart Link */
-a img {
+#my_chart {
   display: block;
+  padding: 50px;
   margin: auto;
   transition: 350ms;
   width: 60px;
 }
 
-a img:hover {
-  width: 90px;
+#my_chart:hover {
+  width: 100px;
 }
 
 body h1 {

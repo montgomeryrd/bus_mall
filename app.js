@@ -5,11 +5,23 @@ var one = document.getElementById('one');
 var two = document.getElementById('two');
 var three = document.getElementById('three');
 
-one.addEventListener('click', listen);
-two.addEventListener('click', listen);
-three.addEventListener('click', listen);
+function startListening(){
+  one.addEventListener('click', listen);
+  two.addEventListener('click', listen);
+  three.addEventListener('click', listen);
+}
 
-//Constructor Function
+function stopListening(){
+  one.removeEventListener('click', listen);
+  two.removeEventListener('click', listen);
+  three.removeEventListener('click', listen);
+}
+
+startListening();
+
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+//Object Constructor/Instantiated Objects---------------------------------------
 function Product(name, filepath, totalClicks, numberOfTimesShown) {
   this.name = name;
   this.filepath = filepath;
@@ -48,6 +60,8 @@ var wineGlass = new Product('wine-glass', './Images/wine-glass.jpg');
 //My array of Instantiated Objects
 var images = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
 
+//------------------------------------------------------------------------------
+//Generates Numbers-------------------------------------------------------------
 //Generates a set of 3 random numbers that are each different from 0 to 19
 var myNumbers = [];
 var randomNumber;
@@ -86,7 +100,9 @@ function checkNums(){
   lastSet = [];
 }
 
-//This produces my first three images
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+//This produces my first three images------------------------------------------
 randomNums();
 console.log('Initial Three Numbers:', myNumbers);
 
@@ -94,17 +110,19 @@ one.setAttribute('src', images[myNumbers[0]].filepath);
 two.setAttribute('src', images[myNumbers[1]].filepath);
 three.setAttribute('src', images[myNumbers[2]].filepath);
 
-//Event Listener Function
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+//Event Listener Function------------------------------------------------------
 var counter = 0;
 
 function listen(e) {
+  stopListening();
   if (counter === 25) {
     one.setAttribute('src', '');
     two.setAttribute('src', thumbsUp.filepath);
     three.setAttribute('src', '');
-    alert('Product Analysis Complete\n\n Scroll Down for Results');
     results();
-    displayChart();
+    showChartIcon();
     return;
   }
 
@@ -131,9 +149,20 @@ function listen(e) {
       console.log('Counter:', counter);
     }
   }
+  startListening();
 }
 
-//A function to create an array of votes and an array of how many times pictures were shown
+//Show Chart Icon
+function showChartIcon() {
+  var chartIcon = document.getElementById('my_chart');
+  chartIcon.getAttribute('style');
+  chartIcon.setAttribute('style', '');
+  chartIcon.addEventListener('click', displayChart);
+}
+
+//-------------------------------------------------------------------------CHART
+//-------------------------------------------------------------------------CHART
+//Create an array of names, an array of votes, and an array of how many times pictures were shown
 var names = [];
 var votes = [];
 var shown = [];
