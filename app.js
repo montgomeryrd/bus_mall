@@ -4,7 +4,7 @@
 var one = document.getElementById('one');
 var two = document.getElementById('two');
 var three = document.getElementById('three');
-var counter = 0;
+
 one.addEventListener('click', listen);
 two.addEventListener('click', listen);
 three.addEventListener('click', listen);
@@ -17,7 +17,7 @@ function Product(name, filepath, totalClicks, numberOfTimesShown) {
   this.numberOfTimesShown = 0;
 }
 
-//Object Literal. I setAttribute this image at the end of the application.
+//Thumbs Up Object Literal. I use this image at the end of the application.
 var thumbsUp = {
   name: 'thumbs',
   filepath: './Images/thumbs.png'
@@ -91,35 +91,31 @@ randomNums();
 console.log('Initial Three Numbers:', myNumbers);
 
 one.setAttribute('src', images[myNumbers[0]].filepath);
-console.log(one);
 two.setAttribute('src', images[myNumbers[1]].filepath);
-console.log(two);
 three.setAttribute('src', images[myNumbers[2]].filepath);
-console.log(three);
 
 //Event Listener Function
+var counter = 0;
+
 function listen(e) {
   if (counter === 25) {
-    one.setAttribute('src', thumbsUp.filepath);
+    one.setAttribute('src', '');
     two.setAttribute('src', thumbsUp.filepath);
-    three.setAttribute('src', thumbsUp.filepath);
-    alert('Product Analysis Complete\n\n Thank you');
-    return;
+    three.setAttribute('src', '');
+    alert('Product Analysis Complete\n\n Scroll Down for Results');
+    results();
     displayChart();
+    return;
   }
 
   counter++;
-  console.log('Counter:', counter);
 
   checkNums();
   console.log('My Newest Set of Numbers:', myNumbers);
 
   one.setAttribute('src', images[myNumbers[0]].filepath);
-  console.log(one);
   two.setAttribute('src', images[myNumbers[1]].filepath);
-  console.log(two);
   three.setAttribute('src', images[myNumbers[2]].filepath);
-  console.log(three);
 
   //This accrues the number of times a specific image was shown
   images[myNumbers[0]].numberOfTimesShown++;
@@ -131,37 +127,80 @@ function listen(e) {
     var source = e.target.getAttribute('src');
     if (source === images[i].filepath) {
       images[i].totalClicks++;
-      console.log('Total Clicks:', images[i].totalClicks);
+      console.log('Voted:', images[i].totalClicks, ' out of ', images[i].numberOfTimesShown, ' times shown.');
+      console.log('Counter:', counter);
     }
   }
 }
 
+//A function to create an array of votes and an array of how many times pictures were shown
+var names = [];
+var votes = [];
+var shown = [];
+
+function results(){
+  for(var i = 0 ; i < images.length ; i++){
+    names.push(images[i].name);
+    votes.push(images[i].totalClicks);
+    shown.push(images[i].numberOfTimesShown);
+  }
+}
+
 //Creating my Chart
-function displayChart() {
+function displayChart(){
   var ctx = document.getElementById('myChart').getContext('2d');
   var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dogDuck', 'dragon', 'pen', 'petSweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'waterCan', 'wineGlass'],
+      labels: names,
       datasets: [{
-        label: '# of Votes',
-        data: images,
+        label: 'Vote Totals',
+        data: votes,
         backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
+          'rgba(0, 51, 0, 0.4)',
+          'rgba(0, 153, 51, 0.4)',
+          'rgba(51, 204, 51, 0.4)',
+          'rgba(102, 255, 102, 0.4)',
+          'rgba(153, 255, 153, 0.4)',
+          'rgba(204, 255, 204, 0.4)',
+          'rgba(255, 204, 255, 0.4)',
+          'rgba(255, 153, 255, 0.4)',
+          'rgba(255, 102, 255, 0.4)',
+          'rgba(255, 0, 255, 0.4)',
+          'rgba(204, 0, 204, 0.4)',
+          'rgba(102, 0, 102, 0.4)',
+          'rgba(153, 0, 204, 0.4)',
+          'rgba(153, 0, 255, 0.4)',
+          'rgba(102, 0, 204, 0.4)',
+          'rgba(102, 102, 153, 0.4)',
+          'rgba(51, 51, 153, 0.4)',
+          'rgba(0, 0, 102, 0.4)',
+          'rgba(51, 51, 0, 0.4)',
+          'rgba(102, 102, 51, 0.4)'
         ],
         borderColor: [
-          'rgba(255,99,132,1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
+          'rgba(0, 51, 0, 0.4)',
+          'rgba(0, 153, 51, 0.4)',
+          'rgba(51, 204, 51, 0.4)',
+          'rgba(102, 255, 102, 0.4)',
+          'rgba(153, 255, 153, 0.4)',
+          'rgba(204, 255, 204, 0.4)',
+          'rgba(255, 204, 255, 0.4)',
+          'rgba(255, 153, 255, 0.4)',
+          'rgba(255, 102, 255, 0.4)',
+          'rgba(255, 0, 255, 0.4)',
+          'rgba(204, 0, 204, 0.4)',
+          'rgba(102, 0, 102, 0.4)',
+          'rgba(153, 0, 204, 0.4)',
+          'rgba(153, 0, 255, 0.4)',
+          'rgba(102, 0, 204, 0.4)',
+          'rgba(102, 102, 153, 0.4)',
+          'rgba(51, 51, 153, 0.4)',
+          'rgba(0, 0, 102, 0.4)',
+          'rgba(51, 51, 0, 0.4)',
+          'rgba(102, 102, 51, 0.4)'
         ],
+
         borderWidth: 1
       }]
     },

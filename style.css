@@ -57,9 +57,10 @@ ul li {
 
 footer {
   clear: both;
-  padding: 100px;
+  margin-bottom: 100px;
 }
 
 p {
   text-align: center;
+  padding: 40px;
 }
