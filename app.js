@@ -48,6 +48,15 @@ var wineGlass = new Product('wine-glass', './Images/wine-glass.jpg');
 //My array of Instantiated Objects
 var images = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
 
+/*var votes = [];
+
+function productVotes(){
+  for(var i = 0 ; i < images.length ; i++) {
+    votes.push(0);
+    console.log(votes);
+  }
+}*/
+
 //Random Number Generator
 //Generates a set of 3 random numbers that are each different from 0 to 19
 var myNumbers = [];
@@ -108,6 +117,7 @@ function listen(e) {
     alert('Product Analysis Complete\n\n Thank you');
     return;
   }
+
   counter++;
   console.log('Counter:', counter);
 
@@ -135,3 +145,23 @@ function listen(e) {
     }
   }
 }
+
+var ctx = document.getElementById('myChart').getContext('2d');
+var chart = new Chart(ctx, {
+  // The type of chart we want to create
+  type: 'bar',
+
+  // The data for our dataset
+  data: {
+    labels: ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dogDuck', 'dragon', 'pen', 'petSweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'waterCan', 'wineGlass'],
+    datasets: [{
+      label: 'Vote Totals',
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+      data: images,
+    }]
+  },
+
+  // Configuration options go here
+  options: {}
+});

@@ -11,9 +11,27 @@ body {
 
 header {
   height: 200px;
+  width: 1000px;
+}
+
+#my_chart {
+  
+}
+
+/* Chart Link */
+a img {
+  display: block;
+  margin: auto;
+  transition: 350ms;
+  width: 60px;
+}
+
+a img:hover {
+  width: 90px;
 }
 
 body h1 {
+  clear:both;
   text-align: center;
   font-family: Homemade Apple;
   font-weight: bold;
