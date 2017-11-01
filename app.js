@@ -17,7 +17,7 @@ function Product(name, filepath, totalClicks, numberOfTimesShown) {
   this.numberOfTimesShown = 0;
 }
 
-//Object Literal
+//Object Literal. I setAttribute this image at the end of the application.
 var thumbsUp = {
   name: 'thumbs',
   filepath: './Images/thumbs.png'
@@ -48,16 +48,6 @@ var wineGlass = new Product('wine-glass', './Images/wine-glass.jpg');
 //My array of Instantiated Objects
 var images = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
 
-/*var votes = [];
-
-function productVotes(){
-  for(var i = 0 ; i < images.length ; i++) {
-    votes.push(0);
-    console.log(votes);
-  }
-}*/
-
-//Random Number Generator
 //Generates a set of 3 random numbers that are each different from 0 to 19
 var myNumbers = [];
 var randomNumber;
@@ -77,8 +67,7 @@ function randomNums (){
   myNumbers.push(randomNumber);
 }
 
-//checkNums checks my nums.
-//It generates a new set of numbers that aren't repeated from the previous set of numbers.
+//Generates a new set of numbers that aren't repeated from the previous set of numbers.
 var lastSet = [];
 
 function checkNums(){
@@ -97,6 +86,7 @@ function checkNums(){
   lastSet = [];
 }
 
+//This produces my first three images
 randomNums();
 console.log('Initial Three Numbers:', myNumbers);
 
@@ -107,7 +97,6 @@ console.log(two);
 three.setAttribute('src', images[myNumbers[2]].filepath);
 console.log(three);
 
-
 //Event Listener Function
 function listen(e) {
   if (counter === 25) {
@@ -116,6 +105,7 @@ function listen(e) {
     three.setAttribute('src', thumbsUp.filepath);
     alert('Product Analysis Complete\n\n Thank you');
     return;
+    displayChart();
   }
 
   counter++;
@@ -136,7 +126,7 @@ function listen(e) {
   images[myNumbers[1]].numberOfTimesShown++;
   images[myNumbers[2]].numberOfTimesShown++;
 
-  //This function will track of how many times the user clicked a specific image
+  //This for loop will track of how many times the user clicked a specific image
   for (var i = 0 ; i < images.length ; i++) {
     var source = e.target.getAttribute('src');
     if (source === images[i].filepath) {
@@ -146,22 +136,43 @@ function listen(e) {
   }
 }
 
-var ctx = document.getElementById('myChart').getContext('2d');
-var chart = new Chart(ctx, {
-  // The type of chart we want to create
-  type: 'bar',
-
-  // The data for our dataset
-  data: {
-    labels: ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dogDuck', 'dragon', 'pen', 'petSweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'waterCan', 'wineGlass'],
-    datasets: [{
-      label: 'Vote Totals',
-      backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgb(255, 99, 132)',
-      data: images,
-    }]
-  },
-
-  // Configuration options go here
-  options: {}
-});
+//Creating my Chart
+function displayChart() {
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['bag', 'banana', 'bathroom', 'boots', 'breakfast', 'bubblegum', 'chair', 'cthulhu', 'dogDuck', 'dragon', 'pen', 'petSweep', 'scissors', 'shark', 'sweep', 'tauntaun', 'unicorn', 'usb', 'waterCan', 'wineGlass'],
+      datasets: [{
+        label: '# of Votes',
+        data: images,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+  });
+}
