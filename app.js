@@ -4,12 +4,24 @@
 var one = document.getElementById('one');
 var two = document.getElementById('two');
 var three = document.getElementById('three');
-var counter = 0;
-one.addEventListener('click', listen);
-two.addEventListener('click', listen);
-three.addEventListener('click', listen);
 
-//Constructor Function
+function startListening(){
+  one.addEventListener('click', listen);
+  two.addEventListener('click', listen);
+  three.addEventListener('click', listen);
+}
+
+function stopListening(){
+  one.removeEventListener('click', listen);
+  two.removeEventListener('click', listen);
+  three.removeEventListener('click', listen);
+}
+
+startListening();
+
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+//Object Constructor/Instantiated Objects---------------------------------------
 function Product(name, filepath, totalClicks, numberOfTimesShown) {
   this.name = name;
   this.filepath = filepath;
@@ -17,7 +29,7 @@ function Product(name, filepath, totalClicks, numberOfTimesShown) {
   this.numberOfTimesShown = 0;
 }
 
-//Object Literal
+//Thumbs Up Object Literal. I use this image at the end of the application.
 var thumbsUp = {
   name: 'thumbs',
   filepath: './Images/thumbs.png'
@@ -48,7 +60,8 @@ var wineGlass = new Product('wine-glass', './Images/wine-glass.jpg');
 //My array of Instantiated Objects
 var images = [bag, banana, bathroom, boots, breakfast, bubblegum, chair, cthulhu, dogDuck, dragon, pen, petSweep, scissors, shark, sweep, tauntaun, unicorn, usb, waterCan, wineGlass];
 
-//Random Number Generator
+//------------------------------------------------------------------------------
+//Generates Numbers-------------------------------------------------------------
 //Generates a set of 3 random numbers that are each different from 0 to 19
 var myNumbers = [];
 var randomNumber;
@@ -68,8 +81,7 @@ function randomNums (){
   myNumbers.push(randomNumber);
 }
 
-//checkNums checks my nums.
-//It generates a new set of numbers that aren't repeated from the previous set of numbers.
+//Generates a new set of numbers that aren't repeated from the previous set of numbers.
 var lastSet = [];
 
 function checkNums(){
@@ -88,50 +100,147 @@ function checkNums(){
   lastSet = [];
 }
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+//This produces my first three images------------------------------------------
 randomNums();
 console.log('Initial Three Numbers:', myNumbers);
 
 one.setAttribute('src', images[myNumbers[0]].filepath);
-console.log(one);
 two.setAttribute('src', images[myNumbers[1]].filepath);
-console.log(two);
 three.setAttribute('src', images[myNumbers[2]].filepath);
-console.log(three);
 
+//-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+//Event Listener Function------------------------------------------------------
+var counter = 0;
 
-//Event Listener Function
 function listen(e) {
+  stopListening();
   if (counter === 25) {
-    one.setAttribute('src', thumbsUp.filepath);
+    one.setAttribute('src', '');
     two.setAttribute('src', thumbsUp.filepath);
-    three.setAttribute('src', thumbsUp.filepath);
-    alert('Product Analysis Complete\n\n Thank you');
+    three.setAttribute('src', '');
+    results();
+    showChartIcon();
     return;
   }
+
   counter++;
-  console.log('Counter:', counter);
 
   checkNums();
   console.log('My Newest Set of Numbers:', myNumbers);
 
   one.setAttribute('src', images[myNumbers[0]].filepath);
-  console.log(one);
   two.setAttribute('src', images[myNumbers[1]].filepath);
-  console.log(two);
   three.setAttribute('src', images[myNumbers[2]].filepath);
-  console.log(three);
 
   //This accrues the number of times a specific image was shown
   images[myNumbers[0]].numberOfTimesShown++;
   images[myNumbers[1]].numberOfTimesShown++;
   images[myNumbers[2]].numberOfTimesShown++;
 
-  //This function will track of how many times the user clicked a specific image
+  //This for loop will track of how many times the user clicked a specific image
   for (var i = 0 ; i < images.length ; i++) {
     var source = e.target.getAttribute('src');
     if (source === images[i].filepath) {
       images[i].totalClicks++;
-      console.log('Total Clicks:', images[i].totalClicks);
+      console.log('Voted:', images[i].totalClicks, ' out of ', images[i].numberOfTimesShown, ' times shown.');
+      console.log('Counter:', counter);
     }
   }
+  startListening();
+}
+
+//Show Chart Icon
+function showChartIcon() {
+  var chartIcon = document.getElementById('my_chart');
+  chartIcon.getAttribute('style');
+  chartIcon.setAttribute('style', '');
+  chartIcon.addEventListener('click', displayChart);
+}
+
+//-------------------------------------------------------------------------CHART
+//-------------------------------------------------------------------------CHART
+//Create an array of names, an array of votes, and an array of how many times pictures were shown
+var names = [];
+var votes = [];
+var shown = [];
+
+function results(){
+  for(var i = 0 ; i < images.length ; i++){
+    names.push(images[i].name);
+    votes.push(images[i].totalClicks);
+    shown.push(images[i].numberOfTimesShown);
+  }
+}
+
+//Creating my Chart
+function displayChart(){
+  var ctx = document.getElementById('myChart').getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: names,
+      datasets: [{
+        label: 'Vote Totals',
+        data: votes,
+        backgroundColor: [
+          'rgba(0, 51, 0, 0.4)',
+          'rgba(0, 153, 51, 0.4)',
+          'rgba(51, 204, 51, 0.4)',
+          'rgba(102, 255, 102, 0.4)',
+          'rgba(153, 255, 153, 0.4)',
+          'rgba(204, 255, 204, 0.4)',
+          'rgba(255, 204, 255, 0.4)',
+          'rgba(255, 153, 255, 0.4)',
+          'rgba(255, 102, 255, 0.4)',
+          'rgba(255, 0, 255, 0.4)',
+          'rgba(204, 0, 204, 0.4)',
+          'rgba(102, 0, 102, 0.4)',
+          'rgba(153, 0, 204, 0.4)',
+          'rgba(153, 0, 255, 0.4)',
+          'rgba(102, 0, 204, 0.4)',
+          'rgba(102, 102, 153, 0.4)',
+          'rgba(51, 51, 153, 0.4)',
+          'rgba(0, 0, 102, 0.4)',
+          'rgba(51, 51, 0, 0.4)',
+          'rgba(102, 102, 51, 0.4)'
+        ],
+        borderColor: [
+          'rgba(0, 51, 0, 0.4)',
+          'rgba(0, 153, 51, 0.4)',
+          'rgba(51, 204, 51, 0.4)',
+          'rgba(102, 255, 102, 0.4)',
+          'rgba(153, 255, 153, 0.4)',
+          'rgba(204, 255, 204, 0.4)',
+          'rgba(255, 204, 255, 0.4)',
+          'rgba(255, 153, 255, 0.4)',
+          'rgba(255, 102, 255, 0.4)',
+          'rgba(255, 0, 255, 0.4)',
+          'rgba(204, 0, 204, 0.4)',
+          'rgba(102, 0, 102, 0.4)',
+          'rgba(153, 0, 204, 0.4)',
+          'rgba(153, 0, 255, 0.4)',
+          'rgba(102, 0, 204, 0.4)',
+          'rgba(102, 102, 153, 0.4)',
+          'rgba(51, 51, 153, 0.4)',
+          'rgba(0, 0, 102, 0.4)',
+          'rgba(51, 51, 0, 0.4)',
+          'rgba(102, 102, 51, 0.4)'
+        ],
+
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+  });
 }

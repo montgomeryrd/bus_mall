@@ -11,9 +11,24 @@ body {
 
 header {
   height: 200px;
+  width: 1000px;
+}
+
+/* Chart Link */
+#my_chart {
+  display: block;
+  padding: 50px;
+  margin: auto;
+  transition: 350ms;
+  width: 60px;
+}
+
+#my_chart:hover {
+  width: 100px;
 }
 
 body h1 {
+  clear:both;
   text-align: center;
   font-family: Homemade Apple;
   font-weight: bold;
@@ -39,9 +54,10 @@ ul li {
 
 footer {
   clear: both;
-  padding: 100px;
+  margin-bottom: 100px;
 }
 
 p {
   text-align: center;
+  margin-top: 20px;
 }

@@ -10,26 +10,35 @@
   </head>
 
   <body>
+
     <header>
+      <img id="my_chart" src="./Images/chart-icon.png" alt="Link for Chart" style="display:none">
     </header>
+
     <h1>BusMall</h1>
     <h2>Market Analysis</h2>
 
     <ul>
       <li>
-        <img id="one" class="spot" src="Images/500.jpg">
+        <img id="one" class="spot" src="">
       </li>
       <li>
-        <img id="two" class="spot" src="Images/500.jpg">
+        <img id="two" class="spot" src="">
       </li>
       <li>
-        <img id="three" class="spot" src="Images/500.jpg">
+        <img id="three" class="spot" src="">
       </li>
     </ul>
 
+    <p>Vote for your favorite products by clicking on them.</p>
+    <p>Once you have made 25 selections, click on the graph icon that appears to view your votes</p>
+
     <footer>
-      <p>Click on a Product that Interests You!</p>
     </footer>
+
+    <canvas id="myChart"></canvas>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <script src="app.js"></script>
+
   </body>
 </html>
